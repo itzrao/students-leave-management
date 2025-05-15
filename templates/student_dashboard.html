@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Welcome, {{ user.full_name }}</h2>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <h4>Apply for Leave</h4>
+        <form method="POST">
+            <div class="mb-3">
+                <label>Leave From</label>
+                <input type="date" name="leave_from" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label>Leave To</label>
+                <input type="date" name="leave_to" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Apply</button>
+        </form>
+    </div>
+
+    <div class="col-md-6">
+        <h4>Leave History</h4>
+        {% if leaves %}
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Leave From</th>
+                    <th>Leave To</th>
+                    <th>No. of Days</th>
+                    <th>Status</th>
+                    <th>Applied On</th>
+                    <th>Modified By</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for leave in leaves %}
+                <tr>
+                    <td>{{ leave.leave_from }}</td>
+                    <td>{{ leave.leave_to }}</td>
+                    <td>{{ leave.no_of_days }}</td>
+                    <td>
+                        {% if leave.status == 'Pending' %}
+                            <span class="badge bg-warning text-dark">{{ leave.status }}</span>
+                        {% elif leave.status == 'Approved' %}
+                            <span class="badge bg-success">{{ leave.status }}</span>
+                        {% elif leave.status == 'Rejected' %}
+                            <span class="badge bg-danger">{{ leave.status }}</span>
+                        {% else %}
+                            {{ leave.status }}
+                        {% endif %}
+                    </td>
+                    <td>{{ leave.applied_on }}</td>
+                    <td>{{ leave.modified_by }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No leave applications found.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
