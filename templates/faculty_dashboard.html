@@ -26,10 +26,10 @@
             <td>{{ leave.no_of_days }}</td>
             <td>{{ leave.applied_on }}</td>
             <td>
-                <form action="{{ url_for('approve_leave', leave_id=leave.id, action='Approved') }}" method="POST" style="display:inline;">
+                <form action="{{ url_for('approve_leave', leave_id=leave.leave_id, action='Approved') }}" method="POST" style="display:inline;">
                     <button type="submit" class="btn btn-success btn-sm">Approve</button>
                 </form>
-                <form action="{{ url_for('approve_leave', leave_id=leave.id, action='Rejected') }}" method="POST" style="display:inline;">
+                <form action="{{ url_for('approve_leave', leave_id=leave.leave_id, action='Rejected') }}" method="POST" style="display:inline;">
                     <button type="submit" class="btn btn-danger btn-sm">Reject</button>
                 </form>
             </td>
