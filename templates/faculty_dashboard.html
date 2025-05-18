@@ -1,55 +1,61 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>Faculty Dashboard</h2>
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Faculty Dashboard</h2>
 
-{% if pending_leaves %}
-<table class="table table-bordered mt-4">
-    <thead>
-        <tr>
-            <th>Student ID</th>
-            <th>Name</th>
-            <th>Leave From</th>
-            <th>Leave To</th>
-            <th>No. of Days</th>
-            <th>Applied On</th>
-            <th>Actions</th>
-            <th>Previous Leave History</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for leave in pending_leaves %}
-        <tr>
-            <td>{{ leave.student_id }}</td>
-            <td>{{ leave.student_name }}</td>
-            <td>{{ leave.leave_from }}</td>
-            <td>{{ leave.leave_to }}</td>
-            <td>{{ leave.no_of_days }}</td>
-            <td>{{ leave.applied_on }}</td>
-            <td>
-                <form action="{{ url_for('approve_leave', leave_id=leave.leave_id, action='Approved') }}" method="POST" style="display:inline;">
-                    <button type="submit" class="btn btn-success btn-sm">Approve</button>
-                </form>
-                <form action="{{ url_for('approve_leave', leave_id=leave.leave_id, action='Rejected') }}" method="POST" style="display:inline;">
-                    <button type="submit" class="btn btn-danger btn-sm">Reject</button>
-                </form>
-            </td>
-            <td>
-                {% set history = get_leave_history(leave.student_id) %}
-                {% if history %}
-                    <ul style="max-height: 150px; overflow-y: auto; padding-left: 15px;">
-                        {% for h in history %}
-                            <li>{{ h.leave_from }} to {{ h.leave_to }} - {{ h.status }}</li>
-                        {% endfor %}
-                    </ul>
-                {% else %}
-                    No history
-                {% endif %}
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-{% else %}
-<p>No pending leave applications.</p>
-{% endif %}
+    {% if pending_leaves %}
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover align-middle text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th>Student ID</th>
+                    <th>Name</th>
+                    <th>Leave From</th>
+                    <th>Leave To</th>
+                    <th>No. of Days</th>
+                    <th>Applied On</th>
+                    <th>Actions</th>
+                    <th>Previous Leave History</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for leave in pending_leaves %}
+                <tr>
+                    <td>{{ leave.student_id }}</td>
+                    <td>{{ leave.student_name }}</td>
+                    <td>{{ leave.leave_from }}</td>
+                    <td>{{ leave.leave_to }}</td>
+                    <td>{{ leave.no_of_days }}</td>
+                    <td>{{ leave.applied_on }}</td>
+                    <td>
+                        <form action="{{ url_for('approve_leave', leave_id=leave.leave_id, action='Approved') }}" method="POST" class="d-inline">
+                            <button type="submit" class="btn btn-success btn-sm mb-1">Approve</button>
+                        </form>
+                        <form action="{{ url_for('approve_leave', leave_id=leave.leave_id, action='Rejected') }}" method="POST" class="d-inline">
+                            <button type="submit" class="btn btn-danger btn-sm">Reject</button>
+                        </form>
+                    </td>
+                    <td>
+                        {% set history = get_leave_history(leave.student_id) %}
+                        {% if history %}
+                        <div class="text-start" style="max-height: 150px; overflow-y: auto;">
+                            <ul class="mb-0 ps-3">
+                                {% for h in history %}
+                                <li>{{ h.leave_from }} to {{ h.leave_to }} - {{ h.status }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% else %}
+                        <span class="text-muted">No history</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="alert alert-info text-center">No pending leave applications.</div>
+    {% endif %}
+</div>
 {% endblock %}

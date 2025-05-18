@@ -7,12 +7,12 @@
         <h4>Apply for Leave</h4>
         <form method="POST">
             <div class="mb-3">
-                <label>Leave From</label>
-                <input type="date" name="leave_from" class="form-control" required>
+                <label for="leave_from">Leave From</label>
+                <input id="leave_from" type="date" name="leave_from" class="form-control" required>
             </div>
             <div class="mb-3">
-                <label>Leave To</label>
-                <input type="date" name="leave_to" class="form-control" required>
+                <label for="leave_to">Leave To</label>
+                <input id="leave_to" type="date" name="leave_to" class="form-control" required>
             </div>
             <button type="submit" class="btn btn-primary">Apply</button>
         </form>
@@ -50,7 +50,7 @@
                         {% endif %}
                     </td>
                     <td>{{ leave.applied_on }}</td>
-                    <td>{{ leave.modified_by }}</td>
+                    <td>{{ leave.modified_by or '—' }}</td>
                 </tr>
                 {% endfor %}
             </tbody>

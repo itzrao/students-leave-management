@@ -2,30 +2,25 @@
 
 {% block content %}
 
+<div class="d-flex flex-column flex-md-row align-items-center justify-content-between my-4 px-3">
+  <img src="{{ url_for('static', filename='css/images/dgr.png') }}" alt="Left Logo" class="img-fluid" style="max-height: 80px;">
 
-
-<div class="d-flex align-items-center justify-content-between my-4">
-  <img src="{{ url_for('static', filename='css/images/dgr.png') }}" alt="Left Logo" style="height: 80px;">
-  
-  <h1 class="display-12 text-center flex-grow-1 mx-3">
+  <h1 class="text-center flex-grow-1 mx-md-3 my-3 my-md-0 fs-4 fs-md-1">
     Students Leave Management System
   </h1>
-  
-  <img src="{{ url_for('static', filename='css/images/nielit.png') }}" alt="Right Logo" style="height: 80px;">
+
+  <img src="{{ url_for('static', filename='css/images/nielit.png') }}" alt="Right Logo" class="img-fluid" style="max-height: 80px;">
 </div>
 
-<div class="text-center mt-2">
-   
-    <p class="lead">NIELIT O Level Course – Module 3</p>
-    
-    <hr class="my-4">
-
-    <h3 class="mt-4">Project Members</h3>
-    <ul class="list-group list-group-flush w-50 mx-auto">
-        <li class="list-group-item">Addagiri Subbarao</li>
-        <li class="list-group-item">Khadar Baji Shaik </li>
-        <li class="list-group-item">Kota Srinivas</li>
-    </ul>
-
+<div class="text-center mt-3 px-3">
+  <p class="lead">NIELIT O Level Course – Module 3</p>
+  <hr class="my-4" />
+  <h3>Project Members</h3>
+  <ul class="list-group list-group-flush w-75 w-md-50 mx-auto">
+    <li class="list-group-item">Addagiri Subbarao</li>
+    <li class="list-group-item">Khadar Baji Shaik</li>
+    <li class="list-group-item">Kota Srinivas</li>
+  </ul>
 </div>
+
 {% endblock %}

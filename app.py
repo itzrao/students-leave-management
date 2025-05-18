@@ -224,17 +224,26 @@ def contact():
         name = request.form.get('name')
         email = request.form.get('email')
         subject = request.form.get('subject')
-        message = request.form.get('message')
+        message = request.form.get('message')  # You got this
 
-        # You can store the message in DB or send an email (for now we’ll just flash it)
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute("""
+            INSERT INTO contact_messages (name, email, subject, message, submitted_at)
+            VALUES (%s, %s, %s, %s, NOW())
+        """, (name, email, subject, message))  # Include message here
+        conn.commit()
+
         flash('Thank you for your message. We will get back to you shortly!', 'success')
         return redirect('/contact')
 
     return render_template('contact.html')
 
-application = app 
 
-if __name__ == '__main__':
-    app.run()
+
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000, debug=True)
+
 
 
